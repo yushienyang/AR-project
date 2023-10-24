@@ -1,21 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- A-Frame and AR.js libraries -->
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
-    <title>AR Treasure Hunt</title>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+
+    <!-- Additional A-Frame components for gesture controls -->
+    <script src="https://unpkg.com/aframe-gesture-detector"></script>
+
+    <meta charset="utf-8" />
 </head>
+<body style='margin: 0; overflow: hidden;'>
 
-<body style="margin: 0; overflow: hidden;">
-    <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: true;">
-        <a-marker preset="hiro">
-            <a-box position="0 0.5 0" rotation="0 45 0" color="#4CC3D9"></a-box>
-        </a-marker>
-        <a-entity camera></a-entity>
-    </a-scene>
+<a-scene embedded arjs='trackingMethod: best;' gesture-detector>
+
+    <!-- Lights -->
+    <a-light type="ambient" color="#fff"></a-light>
+    <a-light type="directional" intensity="7" position="2 4 -3"></a-light>
+    <a-light type="point" intensity="7" position="0 5 -5" distance="20" decay="2"></a-light>
+
+    <!-- Object 1 with Hiro marker -->
+    <a-marker preset='hiro'>
+        <a-entity 
+            gesture-handler
+            gltf-model="https://cdn.glitch.global/03465d97-4e4d-4897-b8ce-06a67f9b63d2/gameready_gameboy_asset.glb?v=1698092177756"
+            scale="2 2 2"
+            position="0 0.5 0">
+        </a-entity>
+    </a-marker>
+
+    <!-- Object 2 with Kanji marker -->
+    <a-marker preset='kanji'>
+        <a-entity 
+            gesture-handler
+            gltf-model="https://cdn.glitch.global/03465d97-4e4d-4897-b8ce-06a67f9b63d2/macintosh_classic_1991.glb?v=1698119763287"
+            scale="5 5 5"
+            position="0 0.5 0"
+            rotation="90 0 180">
+        </a-entity>
+    </a-marker>
+
+    <a-entity camera></a-entity>
+
+</a-scene>
 </body>
-
 </html>
